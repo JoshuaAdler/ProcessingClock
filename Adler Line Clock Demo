@@ -1,0 +1,83 @@
+String[] headlines = {
+  "Times"
+  };
+
+PFont font;
+int y = 100;
+//PFont f; 
+float x;
+float z;  //"y" in demo watched
+int index = 0;
+
+//moving line
+void setup() {
+  size(640, 320);
+  stroke(255);
+  frameRate(100);
+
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
+
+  font = createFont("Arial", 18, true);
+  //textFont(font);
+  z = height;
+}
+
+void draw() {
+  background(0);
+  fill(0);
+  textFont(font,18);
+ text(headlines[index], 180, z);
+ 
+ z= z-5;
+ 
+ float w = textWidth(headlines[index]);
+ if (z < -w) {
+   z=width;
+   index = (index + 1) % headlines.length;
+ }
+   { 
+  y = y - 1; 
+  if (y < 0) { 
+    y = height; 
+  } 
+  line(0, y, width, y);  
+} 
+
+  String ap = "am";
+  int h = hour();    // Values from 0 - 23
+  int min = minute();  // Values from 0 - 59
+  int s = second();  // Values from 0 - 59
+
+  if (h == 0) {
+    h = 12;
+  }
+
+  if (h > 12) {
+    h = h%12;
+    ap = "pm";
+  }
+
+  String minp;  
+  if (min < 10) {
+    minp = nf(min, 2);
+  } else {
+    minp = "" + min;
+  }
+
+  //String time = "" +  h + ":" + min + ":" + s + " " + ap; // h_m_s__m_d_y
+  String time = h + ":" + minp; // h_m
+
+  fill(255);
+  textSize(100);
+  textAlign(CENTER, CENTER);
+  text(time, width/2, height/2); 
+  
+
+  //println (time);
+}
+
+
+//////////////
+
+
